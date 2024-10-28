@@ -1,32 +1,38 @@
 {
+  "name": "polar-figma",
+  "version": "1.0.0",
+  "description": "react",
+  "scripts": {
+    "test": "npm run tsc && npm run build",
+    "format": "prettier --write .",
+    "tsc": "npm run tsc:main && npm run tsc:ui",
+    "tsc:main": "tsc --noEmit -p src/main",
+    "tsc:ui": "tsc --noEmit -p src/ui",
+    "tsc:watch": "concurrently -n widget,iframe \"npm run tsc:main -- --watch --preserveWatchOutput\" \"npm run tsc:ui -- --watch --preserveWatchOutput\"",
+    "build": "npm run build:ui && npm run build:main -- --minify",
+    "build:main": "esbuild src/main/main.ts --bundle --outfile=dist/code.js",
+    "build:ui": "npx vite build --minify esbuild --emptyOutDir=false",
+    "build:watch": "concurrently -n widget,iframe \"npm run build:main -- --watch\" \"npm run build:ui -- --watch\"",
+    "dev": "concurrently -n tsc,build,vite 'npm:tsc:watch' 'npm:build:watch' 'vite'"
+  },
+  "author": "Polar",
+  "license": "MIT",
   "dependencies": {
-    "@create-figma-plugin/ui": "^3.2.1",
-    "@create-figma-plugin/utilities": "^3.2.1",
-    "preact": ">=10"
+    "@polar-sh/sdk": "^0.13.5",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   },
   "devDependencies": {
-    "@create-figma-plugin/build": "^3.2.1",
-    "@create-figma-plugin/tsconfig": "^3.2.1",
-    "@figma/plugin-typings": "1.100.2",
-    "concurrently": ">=8",
-    "tailwindcss": ">=3",
-    "typescript": ">=4"
-  },
-  "scripts": {
-    "build": "npm run build:css && npm run build:js",
-    "build:css": "tailwindcss --input ./src/input.css --output ./src/output.css",
-    "build:js": "build-figma-plugin --typecheck --minify",
-    "watch": "npm run build:css && concurrently npm:watch:css npm:watch:js",
-    "watch:css": "tailwindcss --input ./src/input.css --output ./src/output.css --watch",
-    "watch:js": "build-figma-plugin --typecheck --watch"
-  },
-  "figma-plugin": {
-    "editorType": [
-      "figma"
-    ],
-    "id": "preact-tailwindcss",
-    "name": "Preact Tailwind Css",
-    "main": "src/main.ts",
-    "ui": "src/ui.tsx"
+    "@figma/plugin-typings": "^1.100.2",
+    "@types/react": "^18.2.38",
+    "@types/react-dom": "^18.2.16",
+    "@vitejs/plugin-react-refresh": "^1.3.6",
+    "concurrently": "^8.2.2",
+    "esbuild": "^0.19.7",
+    "prettier": "^3.1.0",
+    "typescript": "^5.3.2",
+    "vite": "^5.0.0",
+    "vite-plugin-singlefile": "^0.13.5",
+    "vite-svg-loader": "^5.1.0"
   }
 }
