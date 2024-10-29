@@ -1,5 +1,7 @@
 # polar-figma
 
+![Polar Figma](./polar-figma.jpg)
+
 A simple example of how to use Polar License Key validation in a Figma plugin.
 
 ### Development
