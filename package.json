@@ -21,7 +21,8 @@
     "@polar-sh/sdk": "^0.13.5",
     "@vitejs/plugin-react": "^4.3.3",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "tailwind-merge": "^2.5.4"
   },
   "devDependencies": {
     "@biomejs/biome": "1.9.4",

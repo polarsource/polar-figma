@@ -4,7 +4,6 @@ import type {
 } from "@polar-sh/sdk/models/components";
 import { polar } from "../polar";
 import { LicenseKeyInput } from "./LicenseKeyInput";
-import { useCallback, useState } from "react";
 
 export interface UnauthenticatedProps {
 	organizationId: string;
@@ -20,13 +19,12 @@ export const Unauthenticated = ({
 	return (
 		<div className="flex flex-col items-center justify-center h-full gap-y-16">
 			<div className="flex flex-col gap-y-2 items-center">
-				<h3 className="text-lg">Welcome to this Polar Example</h3>
+				<h3 className="text-lg font-medium">Polar License Key Example</h3>
 				<p className="text-sm text-gray-500">
 					Enter your license key to continue
 				</p>
 			</div>
 			<LicenseKeyInput
-				polar={polar}
 				organizationId={organizationId}
 				onValidation={onValidation}
 				onActivation={onValidation}

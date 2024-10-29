@@ -4,9 +4,10 @@ import type {
 	ValidatedLicenseKey,
 } from "@polar-sh/sdk/models/components";
 import React, { useState, useCallback } from "react";
+import { twMerge } from "tailwind-merge";
+import { polar } from "../polar";
 
 export interface LicenseKeyInputProps {
-	polar: Polar;
 	organizationId: string;
 	needsActivation?: boolean;
 	onValidation?: (validation: ValidatedLicenseKey) => void;
@@ -14,7 +15,6 @@ export interface LicenseKeyInputProps {
 }
 
 export const LicenseKeyInput = ({
-	polar,
 	organizationId,
 	needsActivation,
 	onActivation,
@@ -22,6 +22,7 @@ export const LicenseKeyInput = ({
 }: LicenseKeyInputProps) => {
 	const [licenseKey, setLicenseKey] = useState("");
 	const [error, setError] = useState<string | null>(null);
+	const [loading, setLoading] = useState(false);
 
 	const handleError = useCallback((error: string) => {
 		setError(error);
@@ -29,7 +30,7 @@ export const LicenseKeyInput = ({
 
 	const handleActivation = useCallback(async () => {
 		setError(null);
-
+		setLoading(true);
 		try {
 			const activation = await polar.users.licenseKeys.activate({
 				key: licenseKey,
@@ -42,12 +43,14 @@ export const LicenseKeyInput = ({
 			if (error instanceof Error) {
 				handleError(error.message);
 			}
+		} finally {
+			setLoading(false);
 		}
-	}, [polar, licenseKey, organizationId, onActivation, handleError]);
+	}, [licenseKey, organizationId, onActivation, handleError]);
 
 	const handleValidation = useCallback(async () => {
 		setError(null);
-
+		setLoading(true);
 		try {
 			const validation = await polar.users.licenseKeys.validate({
 				key: licenseKey,
@@ -59,8 +62,10 @@ export const LicenseKeyInput = ({
 			if (error instanceof Error) {
 				handleError(error.message);
 			}
+		} finally {
+			setLoading(false);
 		}
-	}, [polar, onValidation, licenseKey, organizationId, handleError]);
+	}, [onValidation, licenseKey, organizationId, handleError]);
 
 	return (
 		<div className="flex flex-col gap-y-4 w-full">
@@ -76,11 +81,15 @@ export const LicenseKeyInput = ({
 				</div>
 			)}
 			<button
-				className="bg-blue-500 text-white py-2 px-4 rounded-xl"
+				className={twMerge(
+					"text-white py-2 px-4 rounded-xl",
+					loading ? "bg-gray-300" : "bg-blue-500",
+				)}
 				onClick={needsActivation ? handleActivation : handleValidation}
 				type="button"
+				disabled={loading}
 			>
-				Validate
+				{loading ? "Validating..." : "Validate"}
 			</button>
 		</div>
 	);
