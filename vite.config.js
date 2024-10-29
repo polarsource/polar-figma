@@ -1,11 +1,17 @@
 import { defineConfig } from "vite";
-import reactRefresh from "@vitejs/plugin-react-refresh";
+import react from '@vitejs/plugin-react'
 import { viteSingleFile } from "vite-plugin-singlefile";
+import tailwindcss from 'tailwindcss'
 
 // https://vitejs.dev/config/
 export default defineConfig({
   root: "./src/ui",
-  plugins: [reactRefresh(), viteSingleFile()],
+  plugins: [react(), viteSingleFile()],
+  css: {
+    postcss: {
+      plugins: [tailwindcss()],
+    },
+  },
   build: {
     target: "esnext",
     assetsInlineLimit: 100000000,

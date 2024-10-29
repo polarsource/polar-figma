@@ -7,7 +7,7 @@ import {
 } from "@polar-sh/sdk/models/components";
 import { Authenticated } from "./components/Authenticated";
 import { createRoot } from 'react-dom/client';
-
+import './input.css';
 const ORGANIZATION_ID = "7cc1d00a-4bdd-4817-bf00-2efdc5c35e96";
 
 function Plugin() {
@@ -55,7 +55,7 @@ function Plugin() {
   }, []);
 
   return (
-    <div>
+    <div className="flex flex-col items-center justify-center h-full">
       {validation ? (
         <Authenticated />
       ) : (
