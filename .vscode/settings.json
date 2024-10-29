@@ -1,10 +1,4 @@
 {
-  "json.schemas": [
-    {
-      "fileMatch": [
-        "package.json"
-      ],
-      "url": "https://yuanqing.github.io/create-figma-plugin/figma-plugin.json"
-    }
-  ]
+	"editor.defaultFormatter": "biomejs.biome",
+	"editor.formatOnSave": true
 }

@@ -1,7 +1,7 @@
 "use strict";
 (() => {
   // src/main/main.ts
-  figma.showUI(__html__, { themeColors: true, height: 300 });
+  figma.showUI(__html__, { themeColors: true, height: 480, width: 360 });
   figma.ui.onmessage = async (message) => {
     switch (message.type) {
       case "getLicenseKey":
