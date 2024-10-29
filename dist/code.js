@@ -6,7 +6,6 @@
     switch (message.type) {
       case "getLicenseKey":
         const licenseKey = await figma.clientStorage.getAsync("license_key");
-        console.log("licenseKey", licenseKey);
         figma.ui.postMessage({
           type: "getLicenseKey",
           data: licenseKey

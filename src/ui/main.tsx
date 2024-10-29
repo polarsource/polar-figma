@@ -9,7 +9,9 @@ import { createRoot } from "react-dom/client";
 import "./input.css";
 import { Unauthenticated } from "./components/Unauthenticated";
 
-const ORGANIZATION_ID = "7cc1d00a-4bdd-4817-bf00-2efdc5c35e96";
+// Replace this with your actual organization ID
+// It can be found in your Polar Organization Settings page
+const ORGANIZATION_ID = "<YOUR_ORGANIZATION_ID>";
 
 function Plugin() {
 	const [validation, setValidation] = useState<
@@ -27,6 +29,8 @@ function Plugin() {
 				{ pluginMessage: { type: "setLicenseKey", data: key } },
 				"*",
 			);
+
+			setValidation(licenseKeyValidation);
 		},
 		[],
 	);
