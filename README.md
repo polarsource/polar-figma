@@ -4,7 +4,7 @@
 
 A simple example of how to use Polar License Key validation in a Figma plugin.
 
-[The complete guide can be found here](https://docs.polar.sh/guides/figma?ref=github)
+[The complete guide can be found here](https://docs.polar.sh/developers/guides/figma?ref=github)
 
 ### Development
 
